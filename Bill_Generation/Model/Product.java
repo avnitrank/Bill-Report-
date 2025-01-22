@@ -22,6 +22,8 @@ public class Product {
     @Column(name = "inventory")
     private int inventory;
 
+
+
     public long getProductId() {
         return productId;
     }
@@ -63,4 +65,16 @@ public class Product {
     }
 
 
-}
+    public String[] toCsvRow() {
+        return new String[]{
+                String.valueOf(productId),
+                String.valueOf(productName),
+                String.valueOf(price),
+                String.valueOf(inventory)
+        };
+    }
+
+
+
+    }
+

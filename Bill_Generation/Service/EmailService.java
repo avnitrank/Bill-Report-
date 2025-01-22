@@ -4,11 +4,13 @@ import com.example.Bill_Generation.Configration.AdminConfiguration;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.nio.file.FileSystem;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -47,7 +49,10 @@ public class EmailService {
         helper.setSubject(subject);
         helper.setText(message);
         helper.setFrom(emailFrom);
+        FileSystemResource fileSystemResource=new FileSystemResource(new File("/Desktop/product.csv"));
+        helper.addAttachment(fileSystemResource.getFilename(),fileSystemResource);
 
         mailSender.send(mimeMessage);
+
     }
 }
